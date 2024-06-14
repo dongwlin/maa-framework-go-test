@@ -40,9 +40,16 @@ jobs:
           out-file-path: "deps"
           extract: true
 
-#      - name: Build
-#        run: |
-#          go build -v -tag customenv
+      - name: Build
+        run: |
+          export DYLD_LIBRARY_PATH=/Users/runner/work/maa-framework-go-test/maa-framework-go-test/deps/bin:$DYLD_LIBRARY_PATH
+          export CGO_CFLAGS="-I/Users/runner/work/maa-framework-go-test/maa-framework-go-test/deps/include"
+          export CGO_LDFLAGS="-L/Users/runner/work/maa-framework-go-test/maa-framework-go-test/deps/bin -lMaaFramework -lMaaToolkit"
+          go build -v -tag customenv -o demo
+
+      - name: Run
+        run: |
+          demo
           
 
 
