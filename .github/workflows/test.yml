@@ -6,7 +6,7 @@ on:
       - "**"
 
 jobs:
-  unbuntu:
+  ubuntu:
     runs-on: ubuntu-latest
     container: archlinux:base-devel
     strategy:
@@ -15,6 +15,11 @@ jobs:
       fail-fast: false
 
     steps:
+      - name: Install git on container
+        run: |
+          pacman -Sy
+          pacman -S --noconfirm git
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
