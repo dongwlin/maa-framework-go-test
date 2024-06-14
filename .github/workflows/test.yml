@@ -91,6 +91,7 @@ jobs:
 
       - name: Run
         run: |
+          mkdir -p TestingDataSet/PipelineSmoking/resource/model/ocr
           cp -r TestingDataSet/MaaCommonAssets/OCR/ppocr_v4/zh_cn TestingDataSet/PipelineSmoking/resource/model/ocr
           export DYLD_LIBRARY_PATH=/Users/runner/work/maa-framework-go-test/maa-framework-go-test/deps/bin:$DYLD_LIBRARY_PATH
           ./demo
