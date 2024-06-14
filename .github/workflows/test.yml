@@ -38,6 +38,7 @@ jobs:
 
       - name: Build
         run: |
+          export CGO_CXXFLAGS="--std=c++11"
           export CGO_CFLAGS="-I/home/runner/work/maa-framework-go-test/maa-framework-go-test/deps/include"
           export CGO_LDFLAGS="-L/home/runner/work/maa-framework-go-test/maa-framework-go-test/deps/bin -lMaaFramework -lMaaToolkit"
           go build -v -tags customenv -o demo
