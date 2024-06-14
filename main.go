@@ -19,7 +19,13 @@ func main() {
 	defer ctrl.Destroy()
 	ctrlId := ctrl.PostConnect()
 
-	res := maa.NewResource(nil)
+	//res := maa.NewResource(nil)
+	res := maa.NewResource(func(msg, detailsJson string) {
+		fmt.Println("--------------------------------------")
+		fmt.Println("msg: ", msg)
+		fmt.Println("details: ", detailsJson)
+		fmt.Println("--------------------------------------")
+	})
 	defer res.Destroy()
 	resDir := filepath.Join(testingDataSetDir, "PipelineSmoking", "resource")
 	resId := res.PostPath(resDir)
