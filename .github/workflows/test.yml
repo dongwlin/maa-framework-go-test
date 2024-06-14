@@ -1,0 +1,48 @@
+name: test
+
+on:
+  push:
+    branches:
+      - "**"
+
+jobs:
+  macos:
+    strategy:
+      matrix:
+        include:
+          - os: macos-13
+            arch: x86_64
+          - os: macos-14
+            arch: aarch64
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodule: recursive
+
+      - name: Print working directory
+        run: pwd
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 'stable'
+
+      - name: Download MaaFramework
+        uses: robinraju/release-downloader@v1.10
+        with:
+          repository: MaaXYZ/MaaFramework
+          latest: true
+          fileName: "MAA-macos-${{ matrix.arch }}*"
+          out-file-path: "deps"
+          extract: true
+
+#      - name: Build
+#        run: |
+#          go build -v -tag customenv
+          
+
+
