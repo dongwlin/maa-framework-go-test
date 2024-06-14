@@ -42,13 +42,13 @@ jobs:
 
       - name: Build
         run: |
-          export DYLD_LIBRARY_PATH=/Users/runner/work/maa-framework-go-test/maa-framework-go-test/deps/bin:$DYLD_LIBRARY_PATH
           export CGO_CFLAGS="-I/Users/runner/work/maa-framework-go-test/maa-framework-go-test/deps/include"
           export CGO_LDFLAGS="-L/Users/runner/work/maa-framework-go-test/maa-framework-go-test/deps/bin -lMaaFramework -lMaaToolkit"
           go build -v -tags customenv -o demo
 
       - name: Run
         run: |
+          export DYLD_LIBRARY_PATH=/Users/runner/work/maa-framework-go-test/maa-framework-go-test/deps/bin:$DYLD_LIBRARY_PATH
           ./demo
           
 
