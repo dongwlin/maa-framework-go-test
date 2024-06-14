@@ -48,6 +48,7 @@ jobs:
 
       - name: Build
         run: |
+          git config --global --add safe.directory /__w/maa-framework-go-test/maa-framework-go-test
           export CGO_CFLAGS="-I/__w/maa-framework-go-test/maa-framework-go-test/deps/include"
           export CGO_LDFLAGS="-L/__w/maa-framework-go-test/maa-framework-go-test/deps/bin -lMaaFramework -lMaaToolkit"
           go build -v -tags customenv -o demo
