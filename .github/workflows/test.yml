@@ -32,7 +32,7 @@ jobs:
         with:
           repository: MaaXYZ/MaaFramework
           latest: true
-          fileName: "MAA-macos-${{ matrix.arch }}*"
+          fileName: "MAA-linux-${{ matrix.arch }}*"
           out-file-path: "deps"
           extract: true
 
