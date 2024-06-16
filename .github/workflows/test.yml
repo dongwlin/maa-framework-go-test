@@ -24,12 +24,16 @@ jobs:
         with:
           go-version: 'stable'
 
-      - name: Set up MSYS2
-        uses: msys2/setup-msys2@v2
-        with:
-          msystem: mingw64
-          update: true
-          install: mingw-w64-x86_64-gcc
+#      - name: Set up MSYS2
+#        uses: msys2/setup-msys2@v2
+#        with:
+#          msystem: mingw64
+#          update: true
+#          install: mingw-w64-x86_64-gcc
+
+      - name: Install GCC
+        run: |
+          choco install -y mingw
 
       - name: Add MSYS2 to PATH
         run: echo "C:/msys64/mingw64/bin" >> $GITHUB_PATH
@@ -47,9 +51,8 @@ jobs:
           extract: true
 
       - name: Build
-        env:
-          CGO_CFLAGS: "-I${{ github.workspace }}/deps/include"
         run: |
+          set CGO_CFLAGS="-I${{ github.workspace }}/deps/include"
           set CGO_LDFLAGS="-L${{ github.workspace }}/deps/bin -lMaaFramework -lMaaToolkit"
           go build -v -tags customenv -o demo.exe
 
