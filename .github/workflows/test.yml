@@ -24,16 +24,12 @@ jobs:
         with:
           go-version: 'stable'
 
-#      - name: Set up MSYS2
-#        uses: msys2/setup-msys2@v2
-#        with:
-#          msystem: mingw64
-#          update: true
-#          install: mingw-w64-x86_64-gcc
-
-      - name: Install MinGW-w64
-        run: |
-          choco install -y mingw-w64-x86_64-gcc
+      - name: Set up MSYS2
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: mingw64
+          update: true
+          install: mingw-w64-x86_64-libwinpthread
 
       - name: Add MSYS2 to PATH
         run: echo "C:/msys64/mingw64/bin" >> $GITHUB_PATH
