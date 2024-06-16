@@ -31,9 +31,9 @@ jobs:
 #          update: true
 #          install: mingw-w64-x86_64-gcc
 
-      - name: Install GCC
+      - name: Install MinGW-w64
         run: |
-          choco install -y mingw
+          choco install -y mingw-w64-x86_64-gcc
 
       - name: Add MSYS2 to PATH
         run: echo "C:/msys64/mingw64/bin" >> $GITHUB_PATH
