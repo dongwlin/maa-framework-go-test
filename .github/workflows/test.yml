@@ -29,7 +29,7 @@ jobs:
         with:
           msystem: mingw64
           update: true
-          install: mingw-w64-x86_64-libwinpthread
+          install: mingw-w64-x86_64-gcc
 
       - name: Add MSYS2 to PATH
         run: echo "C:/msys64/mingw64/bin" >> $GITHUB_PATH
@@ -48,8 +48,8 @@ jobs:
 
       - name: Build
         run: |
-          set CGO_CFLAGS="-I${{ github.workspace }}/deps/include"
-          set CGO_LDFLAGS="-L${{ github.workspace }}/deps/bin -lMaaFramework -lMaaToolkit"
+          set CGO_CFLAGS="-I${{ github.workspace }}\deps\include"
+          set CGO_LDFLAGS="-L${{ github.workspace }}\deps\bin -lMaaFramework -lMaaToolkit"
           go build -v -tags customenv -o demo.exe
 
       - name: Run
