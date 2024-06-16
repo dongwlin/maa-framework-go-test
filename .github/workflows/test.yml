@@ -48,8 +48,8 @@ jobs:
 
       - name: Build
         run: |
-          Set CGO_CFLAGS="-I${{ github.workspace }}/deps/include"
-          Set CGO_LDFLAGS="-L${{ github.workspace }}/deps/bin -lMaaFramework -lMaaToolkit"
+          set CGO_CFLAGS="-I${{ github.workspace }}/deps/include"
+          set CGO_LDFLAGS="-L${{ github.workspace }}/deps/bin -lMaaFramework -lMaaToolkit"
           go build -v -tags customenv -o demo.exe
 
       - name: Run
