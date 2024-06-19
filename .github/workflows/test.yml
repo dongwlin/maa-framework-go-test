@@ -43,16 +43,12 @@ jobs:
           repository: MaaXYZ/MaaFramework
           latest: true
           fileName: "MAA-linux-${{ matrix.arch }}*"
-          out-file-path: "deps"
+          out-file-path: "C:/maa"
           extract: true
 
       - name: Build
-        env:
-          CGO_CFLAGS: "-I${{ github.workspace }}\\deps\\include"
-          CGO_LDFLAGS: "-L${{ github.workspace }}\\deps\\bin -lMaaFramework -lMaaToolkit"
         run: |
-          go env
-          go build -v -tags customenv -o demo.exe
+          go build -v -o demo.exe
 
       - name: Run
         run: |
