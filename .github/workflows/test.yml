@@ -60,7 +60,7 @@ jobs:
           mkdir -p TestingDataSet/PipelineSmoking/resource/model/ocr
           cp -r TestingDataSet/MaaCommonAssets/OCR/ppocr_v4/zh_cn TestingDataSet/PipelineSmoking/resource/model/ocr
           cp -r TestingDataSet build/TestingDataSet
-          cp -r deps/bin build
+          cp deps/bin/* build/
           ls -Path build
 
       - name: Run
