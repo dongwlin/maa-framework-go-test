@@ -48,7 +48,7 @@ jobs:
 
       - name: Build
         run: |
-          ls -p C:/maa
+          ls -Path C:/maa
           go build -v -o demo.exe
 
       - name: Run
