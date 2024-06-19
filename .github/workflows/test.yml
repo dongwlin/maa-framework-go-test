@@ -43,7 +43,7 @@ jobs:
           repository: MaaXYZ/MaaFramework
           latest: true
           fileName: "MAA-win-${{ matrix.arch }}*"
-          out-file-path: "{{ github.workspace }}/deps"
+          out-file-path: "${{ github.workspace }}/deps"
           extract: true
 
       - name: Build
