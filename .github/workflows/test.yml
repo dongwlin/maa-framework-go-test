@@ -24,15 +24,17 @@ jobs:
         with:
           go-version: 'stable'
 
-      - name: Set up MSYS2
-        uses: msys2/setup-msys2@v2
+      - name: Download mingw64
+        uses: robinraju/release-downloader@v1.10
         with:
-          msystem: mingw64
-          update: true
-          install: mingw-w64-x86_64-gcc
+          repository: niXman/mingw-builds-binaries
+          tag: '13.2.0-rt_v11-rev0'
+          fileName: 'x86_64-13.2.0-release-win32-seh-ucrt-rt_v11-rev0.7z'
+          out-file-path: 'C:/mingw64'
+          extract: true
 
-      - name: Add MSYS2 to PATH
-        run: echo "C:/msys64/mingw64/bin" >> $GITHUB_PATH
+      - name: Add mingw64 to PATH
+        run: echo "C:/mingw64/bin" >> $GITHUB_PATH
 
       - name: Verify GCC installation
         run: gcc --version
