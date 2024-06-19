@@ -53,11 +53,14 @@ jobs:
         run: |
           go build -v -tags customenv -o demo.exe
 
-      - name: Run
+      - name: Run ready
         run: |
           mkdir -p TestingDataSet/PipelineSmoking/resource/model/ocr
           cp -r TestingDataSet/MaaCommonAssets/OCR/ppocr_v4/zh_cn TestingDataSet/PipelineSmoking/resource/model/ocr
           echo "${{ github.workspace }}/deps/bin" >> $GITHUB_PATH
+
+      - name: Run
+        run: |
           ./demo.exe
 
 
