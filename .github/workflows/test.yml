@@ -55,7 +55,6 @@ jobs:
 
       - name: Run
         run: |
-          echo {{ github.workspace }}/deps/bin >> $GITHUB_PATH
           mkdir -p TestingDataSet/PipelineSmoking/resource/model/ocr
           cp -r TestingDataSet/MaaCommonAssets/OCR/ppocr_v4/zh_cn TestingDataSet/PipelineSmoking/resource/model/ocr
           echo "${{ github.workspace }}/deps/bin" >> $GITHUB_PATH
