@@ -51,17 +51,18 @@ jobs:
           CGO_CFLAGS: "-I${{ github.workspace }}\\deps\\include"
           CGO_LDFLAGS: "-L${{ github.workspace }}\\deps\\bin -lMaaFramework -lMaaToolkit"
         run: |
-          go build -v -tags customenv -o demo.exe
+          go build -v -tags customenv -o ./build/demo.exe
 
       - name: Run ready
         run: |
           mkdir -p TestingDataSet/PipelineSmoking/resource/model/ocr
           cp -r TestingDataSet/MaaCommonAssets/OCR/ppocr_v4/zh_cn TestingDataSet/PipelineSmoking/resource/model/ocr
-          echo "${{ github.workspace }}/deps/bin" >> $GITHUB_PATH
+          cp -r TestingDataSet build/TestingDataSet
+          cp -r deps/bin build
 
       - name: Run
         run: |
-          ./demo.exe
+          ./build/demo.exe
 
 
   ubuntu:
