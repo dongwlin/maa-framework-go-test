@@ -24,21 +24,6 @@ jobs:
         with:
           go-version: 'stable'
 
-      - name: Download mingw64
-        uses: robinraju/release-downloader@v1.10
-        with:
-          repository: niXman/mingw-builds-binaries
-          tag: '13.2.0-rt_v11-rev0'
-          fileName: 'x86_64-13.2.0-release-win32-seh-ucrt-rt_v11-rev0.7z'
-          out-file-path: 'C:/mingw64'
-          extract: true
-
-      - name: Add mingw64 to PATH
-        run: echo "C:/mingw64/bin" >> $GITHUB_PATH
-
-      - name: Verify GCC installation
-        run: gcc --version
-
       - name: Download MaaFramework
         uses: robinraju/release-downloader@v1.10
         with:
@@ -61,7 +46,6 @@ jobs:
           cp -r TestingDataSet/MaaCommonAssets/OCR/ppocr_v4/zh_cn TestingDataSet/PipelineSmoking/resource/model/ocr
           cp -r TestingDataSet build/TestingDataSet
           cp deps/bin/* build/
-          ls -Path build
 
       - name: Run
         run: |
@@ -107,16 +91,16 @@ jobs:
 
       - name: Build
         run: |
-          git config --global --add safe.directory /__w/maa-framework-go-test/maa-framework-go-test
-          export CGO_CFLAGS="-I/__w/maa-framework-go-test/maa-framework-go-test/deps/include"
-          export CGO_LDFLAGS="-L/__w/maa-framework-go-test/maa-framework-go-test/deps/bin -lMaaFramework -lMaaToolkit"
+          git config --global --add safe.directory ${{ github.workspace }}
+          export CGO_CFLAGS="-I${{ github.workspace }}/deps/include"
+          export CGO_LDFLAGS="-L${{ github.workspace }}/deps/bin -lMaaFramework -lMaaToolkit"
           go build -v -tags customenv -o demo
 
       - name: Run
         run: |
           mkdir -p TestingDataSet/PipelineSmoking/resource/model/ocr
           cp -r TestingDataSet/MaaCommonAssets/OCR/ppocr_v4/zh_cn TestingDataSet/PipelineSmoking/resource/model/ocr
-          export LD_LIBRARY_PATH=/__w/maa-framework-go-test/maa-framework-go-test/deps/bin:$LD_LIBRARY_PATH
+          export LD_LIBRARY_PATH=${{ github.workspace }}/deps/bin:$LD_LIBRARY_PATH
           ./demo
 
   macos:
@@ -152,15 +136,15 @@ jobs:
 
       - name: Build
         run: |
-          export CGO_CFLAGS="-I/Users/runner/work/maa-framework-go-test/maa-framework-go-test/deps/include"
-          export CGO_LDFLAGS="-L/Users/runner/work/maa-framework-go-test/maa-framework-go-test/deps/bin -lMaaFramework -lMaaToolkit"
+          export CGO_CFLAGS="-I${{ github.workspace }}/deps/include"
+          export CGO_LDFLAGS="-L${{ github.workspace }}/deps/bin -lMaaFramework -lMaaToolkit"
           go build -v -tags customenv -o demo
 
       - name: Run
         run: |
           mkdir -p TestingDataSet/PipelineSmoking/resource/model/ocr
           cp -r TestingDataSet/MaaCommonAssets/OCR/ppocr_v4/zh_cn TestingDataSet/PipelineSmoking/resource/model/ocr
-          export DYLD_LIBRARY_PATH=/Users/runner/work/maa-framework-go-test/maa-framework-go-test/deps/bin:$DYLD_LIBRARY_PATH
+          export DYLD_LIBRARY_PATH=${{ github.workspace }}/deps/bin:$DYLD_LIBRARY_PATH
           ./demo
           
 
