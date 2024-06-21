@@ -90,13 +90,10 @@ jobs:
           out-file-path: "deps"
           extract: true
 
-      - name: Set MaaFramework env
-        run: |
-          echo "CGO_CFLAGS=-I${{ github.workspace }}/deps/include" >> $env:GITHUB_ENV
-          echo "CGO_LDFLAGS=-L${{ github.workspace }}/deps/bin -lMaaFramework -lMaaToolkit" >> $env:GITHUB_ENV
-
       - name: Build
         run: |
+          export CGO_CFLAGS="-I${{ github.workspace }}/deps/include"
+          export CGO_LDFLAGS="-L${{ github.workspace }}/deps/bin -lMaaFramework -lMaaToolkit"
           go build -v -tags customenv -o demo
 
       - name: Run
