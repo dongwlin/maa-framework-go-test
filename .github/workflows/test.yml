@@ -81,6 +81,7 @@ jobs:
 
       - name: Build
         run: |
+          sudo update-alternatives --set gcc /usr/bin/gcc-12
           gcc --version
           export CGO_CFLAGS="-I${{ github.workspace }}/deps/include"
           export CGO_LDFLAGS="-L${{ github.workspace }}/deps/bin -lMaaFramework -lMaaToolkit"
