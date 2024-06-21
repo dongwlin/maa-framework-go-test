@@ -54,23 +54,12 @@ jobs:
 
   ubuntu:
     runs-on: ubuntu-latest
-    container: archlinux:base-devel
     strategy:
       matrix:
         arch: [ x86_64 ]
       fail-fast: false
 
     steps:
-      - name: Update system
-        run: |
-          pacman -Syu --noconfirm
-          
-      - name: Install Git
-        run: |
-          pacman -Sy
-          pacman -S --noconfirm git
-          git config --global --add safe.directory "*"
-
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -92,8 +81,8 @@ jobs:
 
       - name: Build
         run: |
-          export CGO_CFLAGS="-I/__w/deps/include"
-          export CGO_LDFLAGS="-L/__w/deps/bin -lMaaFramework -lMaaToolkit"
+          export CGO_CFLAGS="-I${{ github.workspace }}/deps/include"
+          export CGO_LDFLAGS="-L${{ github.workspace }}/deps/bin -lMaaFramework -lMaaToolkit"
           go build -v -tags customenv -o demo
 
       - name: Run
