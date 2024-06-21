@@ -69,6 +69,7 @@ jobs:
         run: |
           pacman -Sy
           pacman -S --noconfirm git
+          git config --global --add safe.directory "*"
 
       - name: Checkout
         uses: actions/checkout@v4
