@@ -92,8 +92,8 @@ jobs:
 
       - name: Build
         run: |
-          echo "CGO_CFLAGS=-I${{ github.workspace }}/deps/include" >> "$GITHUB_ENV"
-          echo "CGO_LDFLAGS=-L${{ github.workspace }}/deps/bin -lMaaFramework -lMaaToolkit" >> "$GITHUB_ENV"
+          echo "CGO_CFLAGS=-I${{ github.workspace }}/deps/include" >> $env:GITHUB_ENV
+          echo "CGO_LDFLAGS=-L${{ github.workspace }}/deps/bin -lMaaFramework -lMaaToolkit" >> $env:GITHUB_ENV
           go build -v -tags customenv -o demo
 
       - name: Run
