@@ -81,6 +81,7 @@ jobs:
 
       - name: Build
         run: |
+          gcc --version
           export CGO_CFLAGS="-I${{ github.workspace }}/deps/include"
           export CGO_LDFLAGS="-L${{ github.workspace }}/deps/bin -lMaaFramework -lMaaToolkit"
           go build -v -tags customenv -o demo
